@@ -1,16 +1,13 @@
+from typing import List
+from src.models import ReceiptItem, Discount, Product
 
-class ReceiptItem:
-    def __init__(self, product, quantity, price, total_price):
-        self.product = product
-        self.quantity = quantity
-        self.price = price
-        self.total_price = total_price
+
 
 
 class Receipt:
     def __init__(self):
-        self._items = []
-        self._discounts = []
+        self._items: List[ReceiptItem] = []
+        self._discounts: List[Discount] = []
 
     def total_price(self):
         total = 0
@@ -20,10 +17,10 @@ class Receipt:
             total += discount.discount_amount
         return total
 
-    def add_product(self, product, quantity, price, total_price):
+    def add_product(self, product: Product, quantity: int, price: float, total_price: float):
         self._items.append(ReceiptItem(product, quantity, price, total_price))
 
-    def add_discount(self, discount):
+    def add_discount(self, discount: Discount):
         self._discounts.append(discount)
 
     @property
